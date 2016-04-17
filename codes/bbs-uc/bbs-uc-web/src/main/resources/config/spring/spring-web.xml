@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 处理器适配器映射器 -->
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+		    <!-- 配置xStream注解  @Xml-->
+			<bean class="com.bone.base.resolver.XStreamArgumentResolver" />
+		    <!-- 配置Fastjson注解  @Json-->
+			<bean class="com.bone.base.resolver.FastJsonArgumentResolver" />
+		</mvc:argument-resolvers>
+		<!-- 配置Fastjson支持 @ResponseBody-->
+		<mvc:message-converters register-defaults="true">			
+			<bean
+				class="com.bone.base.converter.FastJsonMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="features">
+					<list>
+						<value>WriteMapNullValue</value>
+						<value>QuoteFieldNames</value>
+					</list>
+				</property>				
+			</bean>
+		</mvc:message-converters> 
+		
+	</mvc:annotation-driven>
+	<!-- 扫包 -->
+	<context:component-scan base-package="com.bone.springweb" />
+
+	<!-- 注解 -->
+	<context:annotation-config />
+
+	<!-- 环境变量 -->
+	<bean
+		class="com.bone.base.environment.PropertyPlaceholderConfigurerSupportMultiEnvironment">
+		<property name="locations">
+			<list>
+				<value>classpath:config/resource/config.properties</value>
+			</list>
+		</property>
+		<property name="placeholderConfigLocations">
+			<list>
+				<value>classpath:config/resource/common_@{envName}.properties</value>
+				<value>classpath:config/resource/jdbc_@{envName}.properties</value>
+			</list>
+		</property>
+		<property name="placeholderPrefix" value="@{" />
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+	</bean>
+
+</beans>
