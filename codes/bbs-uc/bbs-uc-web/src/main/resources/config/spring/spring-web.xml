@@ -49,12 +49,12 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/resource/config.properties</value>
+				<value>classpath:config/resource/jdbc.properties</value>
 			</list>
 		</property>
 		<property name="placeholderConfigLocations">
 			<list>
 				<value>classpath:config/resource/common_@{envName}.properties</value>
-				<value>classpath:config/resource/jdbc_@{envName}.properties</value>
 			</list>
 		</property>
 		<property name="placeholderPrefix" value="@{" />

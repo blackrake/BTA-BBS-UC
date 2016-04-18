@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuniu.pcs.product.salesrecommend.domain.ResourceAccessLog">
+	<resultMap
+		type="com.tuniu.pcs.product.salesrecommend.domain.query.ResourceAccessLogQuery"
+		id="resourceAccessLog">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="divisionId" column="division_id" jdbcType="INTEGER" />
+		<result property="departmentId" column="department_id"
+			jdbcType="INTEGER" />
+		<result property="groupId" column="group_id" jdbcType="INTEGER" />
+		<result property="divisionName" column="division_name"
+			jdbcType="VARCHAR" />
+		<result property="departmentName" column="department_name"
+			jdbcType="VARCHAR" />
+		<result property="groupName" column="group_name" jdbcType="VARCHAR" />
+		<result property="deleteFlag" column="delete_flag" jdbcType="INTEGER" />
+		<result property="operateTime" column="create_time" jdbcType="TIMESTAMP" />
+		<result property="createUserId" column="create_user_id"
+			jdbcType="INTEGER" />
+		<result property="createUsername" column="create_username"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="base_Column_List">
+		slg.id,
+		slg.division_id,
+		slg.department_id,
+		slg.group_id,
+		slg.division_name,
+		slg.department_name,
+		slg.department_name,
+		slg.group_name,
+		slg.create_time,
+		slg.create_user_id,
+		slg.create_username
+	</sql>
+
+	<select id="selectCountLog">
+		SELECT
+		COUNT(id)
+		from
+		search_log sl
+		where and
+		sl.delete_flag = 0
+	</select>
+
+	<select id="select" resultMap="resourceAccessLog"
+		parameterType="com.tuniu.pcs.product.salesrecommend.domain.query.ResourceAccessLogQuery">
+		select
+		<include refid="base_Column_List" />
+		from
+		search_log slg
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startDate != null and endDate != null ">and slg.create_time between #{startDate} and #{endDate}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	<select id="queryUnknownUserID" resultMap="resourceAccessLog">
+		select DISTINCT(create_user_id),create_username from search_log where delete_flag=0 and division_id=0
+	</select>
+
+	<update id="updateByIdSelective"
+		parameterType="com.tuniu.pcs.product.salesrecommend.domain.query.ResourceAccessLogQuery">
+		UPDATE
+		search_log
+		<set>
+			<if test="divisionId != null and divisionId !=0 ">
+				division_id = #{divisionId,jdbcType=INTEGER},
+			</if>
+			<if test="divisionName != null">
+				division_name = #{divisionName,jdbcType=VARCHAR},
+			</if>
+			<if test="departmentId != null and departmentId !=0 ">
+				department_id = #{departmentId,jdbcType=INTEGER},
+			</if>
+			<if test="departmentName != null">
+				department_name = #{departmentName,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId !=0 ">
+				group_id = #{groupId,jdbcType=INTEGER},
+			</if>
+			<if test="groupName != null">
+				group_name = #{groupName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<where>
+			<trim prefixOverrides="and">
+				and create_user_id=#{createUserId}
+				AND delete_flag=0 AND division_id=0
+			</trim>
+		</where>
+	</update>
+
+	<insert id="insertLog"
+		parameterType="com.tuniu.pcs.product.salesrecommend.domain.query.ResourceAccessLogQuery">
+		INSERT INTO search_log
+		<trim prefix="(" suffix=")" prefixOverrides=",">
+			division_id,
+			division_name,
+			department_id,
+			department_name,
+			group_id,
+			group_name,
+			create_user_id,
+			create_username
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" prefixOverrides=",">
+			#{divisionId},
+			#{divisionName},
+			#{departmentId},
+			#{departmentName},
+			#{groupId},
+			#{groupName},
+			#{createUserId},
+			#{createUsername}
+		</trim>
+	</insert>
+
+
+
+</mapper>

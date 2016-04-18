@@ -12,7 +12,23 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
 
 
-    <bean id="dataSource_uc" class="org.springframework.jndi.JndiObjectFactoryBean">  
+    <!-- <bean id="dataSource_uc" class="org.springframework.jndi.JndiObjectFactoryBean">  
         <property name="jndiName" value="java:comp/env/jdbc/bbs_uc" />       
-    </bean>
+    </bean> -->
+    
+   <!--  <jee:jndi-lookup id="dataSource_uc" jndi-name="@{datasource.jndiName.uc}" proxy-interface="javax.sql.DataSource"
+		lookup-on-startup="false" />
+		
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_uc" />
+		<property name="mapperLocations" value="classpath*:config/mybatis/**/*Mapper.xml" />
+		<property name="transactionFactory" ref="transactionFactory" />		
+	</bean>	
+	事务工厂 
+	<bean id="transactionFactory" class="org.mybatis.spring.transaction.SpringManagedTransactionFactory" />
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />		
+	</bean> -->
+	
 </beans>

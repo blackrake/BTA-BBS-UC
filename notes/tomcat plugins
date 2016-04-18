@@ -1,0 +1,6 @@
+server.xml
+<Resource acquireIncrement="2" auth="Container" description="DB Connection" driverClass="com.mysql.jdbc.Driver" factory="org.apache.naming.factory.BeanFactory" idleConnectionTestPeriod="56" jdbcUrl="jdbc:mysql://localhost:3306/user_center?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" maxIdleTime="56" maxPoolSize="10" maxStatements="0" minPoolSize="2" name="jdbc/bbs_uc" numHelperThreads="3" password="Zrong1019" preferredTestQuery="select 1" type="com.mchange.v2.c3p0.ComboPooledDataSource" user="root"/>		
+
+
+context.xml
+	<ResourceLink global="jdbc/bbs_uc" name="jdbc/bbs_uc" type="javax.sql.DataSource"/>
