@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bone.bbs.uc.domain.UserLoginLog">
+	<resultMap type="com.bone.bbs.uc.domain.UserLoginLog" id="userLoginLog">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="userId" column="user_id" jdbcType="INTEGER" />
+		<result property="ip" column="ip" jdbcType="VARCHAR" />
+		<result property="deleteFlag" column="delete_flag" jdbcType="INTEGER" />
+		<result property="createTime" column="create_time" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="base_Column_List">
+		ul.id,
+		ul.user_id,
+		ul.ip,
+		ul.create_time,
+		ul.delete_flag
+	</sql>
+
+	<select id="select" resultMap="userLoginLog"
+		parameterType="com.bone.bbs.uc.domain.query.UserLoginLogQuery">
+		select
+		<include refid="base_Column_List" />
+		from
+		user_login ul
+		<where>
+			<trim prefixOverrides="and">
+				<if test="startDate != null and endDate != null ">and ul.create_time between #{startDate} and #{endDate}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="com.bone.bbs.uc.domain.UserLoginLog">
+		INSERT INTO user_login
+		<trim prefix="(" suffix=")" prefixOverrides=",">
+			user_id,
+			ip
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" prefixOverrides=",">
+			#{userId},
+			#{ip}
+		</trim>
+	</insert>
+
+
+
+</mapper>
