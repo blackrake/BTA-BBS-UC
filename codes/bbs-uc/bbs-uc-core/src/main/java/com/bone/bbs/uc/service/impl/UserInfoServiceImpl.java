@@ -2,12 +2,15 @@ package com.bone.bbs.uc.service.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.bone.base.dao.BaseDao;
 import com.bone.base.service.impl.BaseServiceImpl;
 import com.bone.bbs.uc.dao.UserInfoDao;
 import com.bone.bbs.uc.domain.UserInfo;
 import com.bone.bbs.uc.service.UserInfoService;
 
+@Service
 public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements UserInfoService {
 
     @Resource
