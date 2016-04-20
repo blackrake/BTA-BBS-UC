@@ -5,7 +5,7 @@
 	<artifactId>bbs-uc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>uc</name>
+	<name>bbs-uc</name>
 	<description>user center</description>
 	<modules>
 		<module>bbs-uc-core</module>
