@@ -49,18 +49,18 @@
             <div class="login-content">
                 <form action="index.html" method="POST" class="margin-bottom-0">
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Username or Email Address" />
+                        <input type="text" id="account" class="form-control input-lg" placeholder="Username or Email Address" />
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Password" />
+                        <input type="password" id="password" class="form-control input-lg" placeholder="Password" />
                     </div>
                     <div class="checkbox m-b-20">
                         <label>
-                            <input type="checkbox" /> Remember Me
+                            <input type="checkbox"  id="rmaw"/> Remember Me A Week
                         </label>
                     </div>
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg">Sign in</button>
+                        <button type="button" onclick="login();" class="btn btn-success btn-block btn-lg">Sign in</button>
                     </div>
                     <div class="m-t-20">
                         Not a member yet? Click <a href="register.html">here</a> to register.
@@ -87,14 +87,9 @@
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 	<script src="${contextPath}/assets/js/login-v2.demo.min.js"></script>
 	<script src="${contextPath}/assets/js/apps.min.js"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
-
-	<script>
-		$(document).ready(function() {
-			App.init();
-			LoginV2.init();
-		});
-	</script>
-	 
+    <script src="${contextPath}/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <!-- add by boneix -->
+    <script src="${contextPath}/assets/partial/js/login.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->	 
 </body>
 </html>
