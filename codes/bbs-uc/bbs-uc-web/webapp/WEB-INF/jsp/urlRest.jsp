@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>REST-TEST</title>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquery-1.7.2.min.js"></script>
+	src="${contextPath}/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 	var lineTestConfig = [
 			{

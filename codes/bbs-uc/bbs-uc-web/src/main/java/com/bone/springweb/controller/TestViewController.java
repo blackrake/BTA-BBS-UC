@@ -46,4 +46,12 @@ public class TestViewController {
 		LOG.debug("testVo.personQueryVo {}", message);
 		return personQueryVo;
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView testLogin(HttpServletRequest request) {
+        LOG.info("testLogin.userIp {}", request.getLocalAddr());
+        ModelAndView model = new ModelAndView();
+        model.setViewName("login");
+        return model;
+    }
 }

@@ -41,7 +41,7 @@
 		<filter-class>com.bone.base.filter.Base64JsonDecodingFilter</filter-class>
 		<init-param>
 			<param-name>noDecode</param-name>
-			<param-value>/view/**,/**-view/**,/**-xml/**,/xml/**</param-value>
+			<param-value>/assets/**,/view/**,/**-view/**,/**-xml/**,/xml/**</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
